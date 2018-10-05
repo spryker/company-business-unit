@@ -34,6 +34,7 @@
     <transfer name="CompanyBusinessUnitCriteriaFilter">
         <property name="idCompany" type="int"/>
         <property name="idCompanyUser" type="int"/>
+        <property name="companyBusinessUnitIds" type="array"/>
         <property name="filter" type="Filter"/>
         <property name="pagination" type="Pagination"/>
     </transfer>

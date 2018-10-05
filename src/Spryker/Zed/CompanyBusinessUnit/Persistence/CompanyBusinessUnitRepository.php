@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\CompanyBusinessUnitCollectionTransfer;
 use Generated\Shared\Transfer\CompanyBusinessUnitCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyBusinessUnitTransfer;
 use Generated\Shared\Transfer\PaginationTransfer;
+use Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnitQuery;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
@@ -55,6 +56,8 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
                 ->filterByIdCompanyUser($criteriaFilterTransfer->getIdCompanyUser())
                 ->endUse();
         }
+
+        $this->filterCompanyBusinessUnitCollection($query, $criteriaFilterTransfer);
 
         $collection = $this->buildQueryFromCriteria($query, $criteriaFilterTransfer->getFilter());
         $collection = $this->getPaginatedCollection($collection, $criteriaFilterTransfer->getPagination());
@@ -143,5 +146,20 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
         }
 
         return $query->find();
+    }
+
+    /**
+     * @param \Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnitQuery $companyBusinessUnitQuery
+     * @param \Generated\Shared\Transfer\CompanyBusinessUnitCriteriaFilterTransfer $criteriaFilterTransfer
+     *
+     * @return void
+     */
+    protected function filterCompanyBusinessUnitCollection(
+        SpyCompanyBusinessUnitQuery $companyBusinessUnitQuery,
+        CompanyBusinessUnitCriteriaFilterTransfer $criteriaFilterTransfer
+    ): void {
+        if ($criteriaFilterTransfer->getCompanyBusinessUnitIds()) {
+            $companyBusinessUnitQuery->filterByIdCompanyBusinessUnit_In($criteriaFilterTransfer->getCompanyBusinessUnitIds());
+        }
     }
 }
