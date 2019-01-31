@@ -8,15 +8,14 @@
 namespace Spryker\Zed\CompanyBusinessUnit\Business\CompanyUserValidator;
 
 use Generated\Shared\Transfer\CompanyUserResponseTransfer;
+use Generated\Shared\Transfer\CompanyUserTransfer;
 
 interface CompanyUserValidatorInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer
+     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      *
      * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
      */
-    public function checkIfCompanyUserUnique(
-        CompanyUserResponseTransfer $companyUserResponseTransfer
-    ): CompanyUserResponseTransfer;
+    public function checkIfCompanyUserUnique(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer;
 }
