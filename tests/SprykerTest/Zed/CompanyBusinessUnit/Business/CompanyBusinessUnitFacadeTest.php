@@ -4,6 +4,7 @@ namespace SprykerTest\Zed\CompanyBusinessUnit\Business;
 
 use Codeception\TestCase\Test;
 use Generated\Shared\DataBuilder\CompanyBusinessUnitBuilder;
+use Generated\Shared\Transfer\CompanyBusinessUnitTransfer;
 use Generated\Shared\Transfer\CompanyUserResponseTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use TypeError;
@@ -141,6 +142,40 @@ class CompanyBusinessUnitFacadeTest extends Test
      */
     public function testGetCompanyBusinessUnitCollectionShouldReturnTransferObject()
     {
+    }
+
+    /**
+     * @return void
+     */
+    public function testFindCompanyBusinessUnitByIdShouldReturnTransferObject(): void
+    {
+        // Arrange
+        $companyBusinessUnitTransfer = $this->tester->haveCompanyBusinessUnit([
+            CompanyBusinessUnitTransfer::FK_COMPANY => $this->tester->haveCompany()->getIdCompany(),
+        ]);
+
+        // Act
+        $actualCompanyBusinessUnitTransfer = $this->getFacade()
+            ->findCompanyBusinessUnitById($companyBusinessUnitTransfer->getIdCompanyBusinessUnit());
+
+        // Assert
+        $this->assertSame($companyBusinessUnitTransfer->getName(), $actualCompanyBusinessUnitTransfer->getName());
+    }
+
+    /**
+     * @return void
+     */
+    public function testFindCompanyBusinessUnitByIdShouldReturnNull(): void
+    {
+        // Arrange
+        $idCompanyBusinessUnit = -1;
+
+        // Act
+        $companyBusinessUnitTransfer = $this->tester->getFacade()
+            ->findCompanyBusinessUnitById($idCompanyBusinessUnit);
+
+        // Assert
+        $this->assertNull($companyBusinessUnitTransfer);
     }
 
     /**

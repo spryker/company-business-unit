@@ -8,7 +8,10 @@
 namespace Spryker\Zed\CompanyBusinessUnit\Persistence\Mapper;
 
 use Generated\Shared\Transfer\CompanyBusinessUnitTransfer;
+use Generated\Shared\Transfer\CompanyTransfer;
 use Generated\Shared\Transfer\SpyCompanyBusinessUnitEntityTransfer;
+use Orm\Zed\Company\Persistence\SpyCompany;
+use Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnit;
 
 class CompanyBusinessUnitMapper implements CompanyBusinessUnitMapperInterface
 {
@@ -36,5 +39,43 @@ class CompanyBusinessUnitMapper implements CompanyBusinessUnitMapperInterface
         CompanyBusinessUnitTransfer $businessUnitTransfer
     ): CompanyBusinessUnitTransfer {
         return $businessUnitTransfer->fromArray($businessUnitEntityTransfer->toArray(), true);
+    }
+
+    /**
+     * @param \Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnit $companyBusinessUnitEntity
+     * @param \Generated\Shared\Transfer\CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
+     *
+     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer
+     */
+    public function mapCompanyBusinessUnitEntityToCompanyBusinessUnitTransfer(
+        SpyCompanyBusinessUnit $companyBusinessUnitEntity,
+        CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
+    ): CompanyBusinessUnitTransfer {
+        $companyBusinessUnitTransfer->fromArray(
+            $companyBusinessUnitEntity->toArray(),
+            true
+        );
+        $companyBusinessUnitTransfer->setCompany($this->mapCompanyEntityToCompanyTransfer(
+            $companyBusinessUnitEntity->getCompany(),
+            new CompanyTransfer()
+        ));
+
+        return $companyBusinessUnitTransfer;
+    }
+
+    /**
+     * @param \Orm\Zed\Company\Persistence\SpyCompany $companyEntity
+     * @param \Generated\Shared\Transfer\CompanyTransfer $companyTransfer
+     *
+     * @return \Generated\Shared\Transfer\CompanyTransfer
+     */
+    protected function mapCompanyEntityToCompanyTransfer(
+        SpyCompany $companyEntity,
+        CompanyTransfer $companyTransfer
+    ): CompanyTransfer {
+        return $companyTransfer->fromArray(
+            $companyEntity->toArray(),
+            true
+        );
     }
 }
