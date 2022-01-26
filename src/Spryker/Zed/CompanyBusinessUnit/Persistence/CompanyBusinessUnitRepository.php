@@ -23,7 +23,7 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
     /**
      * @var string
      */
-    protected const TABLE_JOIN_PARENT_BUSINESS_UNIT = 'parentCompanyBusinessUnit';
+    protected const TABLE_JOIN_PARENT_COMPANY_BUSINESS_UNIT = 'parentCompanyBusinessUnit';
 
     /**
      * @param int $idCompanyBusinessUnit
@@ -196,8 +196,8 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
     {
         return $this->getFactory()
             ->createCompanyBusinessUnitQuery()
-            ->leftJoinParentCompanyBusinessUnit(static::TABLE_JOIN_PARENT_BUSINESS_UNIT)
-            ->with(static::TABLE_JOIN_PARENT_BUSINESS_UNIT)
+            ->leftJoinParentCompanyBusinessUnit(static::TABLE_JOIN_PARENT_COMPANY_BUSINESS_UNIT)
+            ->with(static::TABLE_JOIN_PARENT_COMPANY_BUSINESS_UNIT)
             ->innerJoinWithCompany();
     }
 }
