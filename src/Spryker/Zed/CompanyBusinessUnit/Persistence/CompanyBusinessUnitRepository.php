@@ -189,7 +189,6 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
         }
     }
 
-
     /**
      * @return \Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnitQuery
      */
