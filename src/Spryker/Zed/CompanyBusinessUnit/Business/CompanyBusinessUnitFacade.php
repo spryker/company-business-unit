@@ -237,4 +237,18 @@ class CompanyBusinessUnitFacade extends AbstractFacade implements CompanyBusines
             ->createCompanyBusinessUnitReader()
             ->findCompanyBusinessUnitByUuid($companyBusinessUnitTransfer);
     }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param list<int> $companyUserIds
+     *
+     * @return array<int, string>
+     */
+    public function getCompanyBusinessUnitNamesIndexedByCompanyUserIds(array $companyUserIds): array
+    {
+        return $this->getRepository()->getCompanyBusinessUnitNamesIndexedByCompanyUserIds($companyUserIds);
+    }
 }

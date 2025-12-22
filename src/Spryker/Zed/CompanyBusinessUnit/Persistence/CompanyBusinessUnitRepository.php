@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\CompanyBusinessUnitCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyBusinessUnitTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\PaginationTransfer;
+use Orm\Zed\CompanyBusinessUnit\Persistence\Map\SpyCompanyBusinessUnitTableMap;
 use Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnitQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
@@ -40,6 +41,11 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
      * @var string
      */
     protected const COL_FK_CUSTOMER = 'fk_customer';
+
+    /**
+     * @see \Orm\Zed\CompanyUser\Persistence\Map\SpyCompanyUserTableMap::COL_ID_COMPANY_USER
+     */
+    protected const string COL_ID_COMPANY_USER = 'spy_company_user.id_company_user';
 
     /**
      * @param int $idCompanyBusinessUnit
@@ -334,5 +340,35 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
             ->endUse()
             ->filterByIdCompanyBusinessUnit($companyUserTransfer->getFkCompanyBusinessUnit())
             ->exists();
+    }
+
+    /**
+     * @param list<int> $companyUserIds
+     *
+     * @return array<int, string>
+     */
+    public function getCompanyBusinessUnitNamesIndexedByCompanyUserIds(array $companyUserIds): array
+    {
+        if ($companyUserIds === []) {
+            return [];
+        }
+
+        $query = $this->getFactory()->createCompanyBusinessUnitQuery();
+        $query
+            ->select([
+                SpyCompanyBusinessUnitTableMap::COL_NAME,
+                static::COL_ID_COMPANY_USER,
+            ])
+            ->useCompanyUserQuery()
+                ->filterByIdCompanyUser_In($companyUserIds)
+            ->endUse();
+
+        $result = [];
+
+        foreach ($query->find() as $item) {
+            $result[$item[static::COL_ID_COMPANY_USER]] = $item[SpyCompanyBusinessUnitTableMap::COL_NAME];
+        }
+
+        return $result;
     }
 }

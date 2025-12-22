@@ -73,4 +73,11 @@ interface CompanyBusinessUnitRepositoryInterface
      * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer|null
      */
     public function findCompanyBusinessUnitByUuid(string $companyBusinessUnitUuid): ?CompanyBusinessUnitTransfer;
+
+    /**
+     * @param list<int> $companyUserIds
+     *
+     * @return array<int, string>
+     */
+    public function getCompanyBusinessUnitNamesIndexedByCompanyUserIds(array $companyUserIds): array;
 }
