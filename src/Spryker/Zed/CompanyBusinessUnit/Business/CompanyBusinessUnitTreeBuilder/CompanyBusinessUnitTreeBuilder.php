@@ -70,6 +70,7 @@ class CompanyBusinessUnitTreeBuilder implements CompanyBusinessUnitTreeBuilderIn
      */
     protected function buildTree(ArrayObject $companyBusinessUnits, ?int $idParentCompanyBusinessUnit, int $indent): ArrayObject
     {
+        /** @var array<int<0, max>, \Generated\Shared\Transfer\CompanyBusinessUnitTreeNodeTransfer> $companyBusinessUnitTreeNodes */
         $companyBusinessUnitTreeNodes = [];
         foreach ($companyBusinessUnits as $companyBusinessUnit) {
             if ($companyBusinessUnit->getFkParentCompanyBusinessUnit() !== $idParentCompanyBusinessUnit) {
@@ -85,6 +86,7 @@ class CompanyBusinessUnitTreeBuilder implements CompanyBusinessUnitTreeBuilderIn
                 ->setChildren($children);
         }
 
+        /** @var \ArrayObject<int<0, max>, \Generated\Shared\Transfer\CompanyBusinessUnitTreeNodeTransfer> */
         return new ArrayObject($companyBusinessUnitTreeNodes);
     }
 
