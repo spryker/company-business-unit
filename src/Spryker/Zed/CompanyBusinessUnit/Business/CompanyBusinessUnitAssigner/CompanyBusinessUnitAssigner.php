@@ -17,19 +17,11 @@ class CompanyBusinessUnitAssigner implements CompanyBusinessUnitAssignerInterfac
      */
     protected $repository;
 
-    /**
-     * @param \Spryker\Zed\CompanyBusinessUnit\Persistence\CompanyBusinessUnitRepositoryInterface $repository
-     */
     public function __construct(CompanyBusinessUnitRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function assignDefaultBusinessUnitToCompanyUser(
         CompanyUserResponseTransfer $companyUserResponseTransfer
     ): CompanyUserResponseTransfer {

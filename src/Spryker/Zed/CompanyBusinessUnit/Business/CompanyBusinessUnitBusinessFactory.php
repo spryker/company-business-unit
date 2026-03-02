@@ -30,9 +30,6 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
  */
 class CompanyBusinessUnitBusinessFactory extends AbstractBusinessFactory
 {
-    /**
-     * @return \Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitWriter\CompanyBusinessUnitWriterInterface
-     */
     public function createCompanyBusinessUnitWriter(): CompanyBusinessUnitWriterInterface
     {
         return new CompanyBusinessUnitWriter(
@@ -42,9 +39,6 @@ class CompanyBusinessUnitBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitCreator\CompanyBusinessUnitCreatorInterface
-     */
     public function createCompanyBusinessUnitCreator(): CompanyBusinessUnitCreatorInterface
     {
         return new CompanyBusinessUnitCreator(
@@ -64,9 +58,6 @@ class CompanyBusinessUnitBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitPluginExecutor\CompanyBusinessUnitPluginExecutorInterface
-     */
     public function createCompanyBusinessUnitPluginExecutor(): CompanyBusinessUnitPluginExecutorInterface
     {
         return new CompanyBusinessUnitPluginExecutor(
@@ -76,9 +67,6 @@ class CompanyBusinessUnitBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitFinder\CompanyBusinessUnitReaderInterface
-     */
     public function createCompanyBusinessUnitReader(): CompanyBusinessUnitReaderInterface
     {
         return new CompanyBusinessUnitReader(
@@ -103,9 +91,6 @@ class CompanyBusinessUnitBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(CompanyBusinessUnitDependencyProvider::PLUGINS_COMPANY_BUSINESS_UNIT_PRE_DELETE);
     }
 
-    /**
-     * @return \Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitTreeBuilder\CompanyBusinessUnitTreeBuilderInterface
-     */
     public function createCompanyBusinessUnitTreeBuilder(): CompanyBusinessUnitTreeBuilderInterface
     {
         return new CompanyBusinessUnitTreeBuilder(
@@ -121,9 +106,6 @@ class CompanyBusinessUnitBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(CompanyBusinessUnitDependencyProvider::PLUGINS_COMPANY_BUSINESS_UNIT_EXPANDER);
     }
 
-    /**
-     * @return \Spryker\Zed\CompanyBusinessUnit\Business\CompanyUserValidator\CompanyUserValidatorInterface
-     */
     public function createCompanyUserValidator(): CompanyUserValidatorInterface
     {
         return new CompanyUserValidator(

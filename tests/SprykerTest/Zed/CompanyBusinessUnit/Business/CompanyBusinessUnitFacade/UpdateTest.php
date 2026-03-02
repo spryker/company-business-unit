@@ -46,9 +46,6 @@ class UpdateTest extends Unit
      */
     protected CompanyBusinessUnitTester $tester;
 
-    /**
-     * @return void
-     */
     public function testUpdateSuccessful(): void
     {
         // Arrange
@@ -89,9 +86,6 @@ class UpdateTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateWithCycleInHierarchy(): void
     {
         // Arrange
@@ -127,9 +121,6 @@ class UpdateTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateSuccessfullyReturnsCompanyInfo(): void
     {
         // Arrange

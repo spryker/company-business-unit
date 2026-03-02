@@ -38,9 +38,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testCreateShouldPersistCompanyBusinessUnit(): void
     {
         // Arrange
@@ -60,9 +57,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testGetCompanyBusinessUnitByIdShouldReturnTransferObject(): void
     {
         // Arrange
@@ -78,9 +72,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         $this->assertSame($companyBusinessUnitTransfer->getName(), $foundBusinessUnitTransfer->getName());
     }
 
-    /**
-     * @return void
-     */
     public function testGetCompanyBusinessUnitByIdShouldThrowExceptionWhenNoIdCompanyBusinessUnitProvided(): void
     {
         // Arrange
@@ -96,9 +87,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
             ->getCompanyBusinessUnitById($companyBusinessUnitTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testFindCompanyBusinessUnitByIdShouldReturnTransferObject(): void
     {
         // Arrange
@@ -114,9 +102,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         $this->assertSame($companyBusinessUnitTransfer->getName(), $actualCompanyBusinessUnitTransfer->getName());
     }
 
-    /**
-     * @return void
-     */
     public function testFindCompanyBusinessUnitByIdShouldReturnNull(): void
     {
         // Arrange
@@ -130,9 +115,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         $this->assertNull($companyBusinessUnitTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testGetCustomerCompanyBusinessUnitTreeShouldReturnNodesCollection(): void
     {
         // Arrange
@@ -154,9 +136,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         $this->assertSame(1, count($companyBusinessUnitTreeNodeCollectionTransfer->getCompanyBusinessUnitTreeNodes()));
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateShouldPersistCompanyBusinessUnitChanges(): void
     {
         // Arrange
@@ -178,9 +157,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         $this->assertSame(static::TEST_NAME, $actualCompanyBusinessUnitTransfer->getName());
     }
 
-    /**
-     * @return void
-     */
     public function testDeleteShouldRemoveCompanyBusinessUnitFromStorage(): void
     {
         // Arrange
@@ -199,9 +175,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testAssignDefaultBusinessUnitToCompanyUserShouldAssignFkCompanyBusinessUnitIfIsNotSet(): void
     {
         // Arrange
@@ -222,9 +195,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testBusinessUnitParentIsSaved(): void
     {
         // Arrange
@@ -248,9 +218,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testBusinessUnitCanBeUpdated(): void
     {
         // Arrange
@@ -278,9 +245,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testBusinessUnitRelationCanBeAddedToExistingUnit(): void
     {
         // Arrange
@@ -341,9 +305,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testDeleteShouldClearParentForChildrenBusinessUnit(): void
     {
         // Arrange
@@ -369,9 +330,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testIsUniqueCompanyUserByCustomerShouldReturnFalseIfCompanyUserRelationAlreadyExists(): void
     {
         // Arrange
@@ -397,9 +355,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         $this->assertFalse($existsCompanyUser->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testIsUniqueCompanyUserByCustomerShouldReturnTrueToUpdateItself(): void
     {
         // Arrange
@@ -423,9 +378,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         $this->assertTrue($existsCompanyUser->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testIsUniqueCompanyUserByCustomerShouldReturnTrueIfFkCompanyBusinessUnitIsEmpty(): void
     {
         // Arrange
@@ -443,9 +395,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         $this->assertTrue($existsCompanyUser->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testIsUniqueCompanyUserByCustomerShouldReturnTrueIfFkCustomerIsEmpty(): void
     {
         // Arrange
@@ -465,9 +414,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         $this->assertTrue($existsCompanyUser->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testIsUniqueCompanyUserByCustomerShouldReturnTrueIfCompanyUserRelationDoesNotExists(): void
     {
         // Arrange
@@ -489,9 +435,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         $this->assertTrue($existsCompanyUser->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testGetCompanyBusinessUnitCollectionShouldReturnTransferObject(): void
     {
         // Arrange
@@ -510,9 +453,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         $this->assertGreaterThan(0, $companyBusinessUnitCollection->getCompanyBusinessUnits()->count());
     }
 
-    /**
-     * @return void
-     */
     public function testFindDefaultBusinessUnitByCompanyIdShouldReturnNull(): void
     {
         // Arrange
@@ -525,9 +465,6 @@ class CompanyBusinessUnitFacadeTest extends Unit
         $this->assertNull($companyBusinessUnitTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateShouldPersistNullablePhoneNumber(): void
     {
         // Arrange

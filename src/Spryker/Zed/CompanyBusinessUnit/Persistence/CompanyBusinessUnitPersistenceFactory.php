@@ -19,17 +19,11 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
  */
 class CompanyBusinessUnitPersistenceFactory extends AbstractPersistenceFactory
 {
-    /**
-     * @return \Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnitQuery
-     */
     public function createCompanyBusinessUnitQuery(): SpyCompanyBusinessUnitQuery
     {
         return SpyCompanyBusinessUnitQuery::create();
     }
 
-    /**
-     * @return \Spryker\Zed\CompanyBusinessUnit\Persistence\Propel\Mapper\CompanyBusinessUnitMapperInterface
-     */
     public function createCompanyBusinessUnitMapper(): CompanyBusinessUnitMapperInterface
     {
         return new CompanyBusinessUnitMapper();

@@ -18,11 +18,6 @@ class CompanyBusinessUnitHelper extends Module
 {
     use LocatorHelperTrait;
 
-    /**
-     * @param array $seedData
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer
-     */
     public function haveCompanyBusinessUnit(array $seedData = []): CompanyBusinessUnitTransfer
     {
         $companyBusinessUnitTransfer = (new CompanyBusinessUnitBuilder($seedData))->build();
@@ -35,36 +30,22 @@ class CompanyBusinessUnitHelper extends Module
             ->getCompanyBusinessUnitTransfer();
     }
 
-    /**
-     * @return int
-     */
     public function getBusinessUnitsCount(): int
     {
         return SpyCompanyBusinessUnitQuery::create()->count();
     }
 
-    /**
-     * @return \Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitFacadeInterface
-     */
     protected function getCompanyBusinessUnitFacade(): CompanyBusinessUnitFacadeInterface
     {
         return $this->getLocator()->companyBusinessUnit()->facade();
     }
 
-    /**
-     * @param string $key
-     *
-     * @return void
-     */
     protected function ensureCompanyBusinessUnitWithKeyDoesNotExist(string $key): void
     {
         $companyBusinessUnitQuery = $this->getCompanyBusinessUnitQuery();
         $companyBusinessUnitQuery->filterByKey($key)->delete();
     }
 
-    /**
-     * @return \Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnitQuery
-     */
     protected function getCompanyBusinessUnitQuery(): SpyCompanyBusinessUnitQuery
     {
         return SpyCompanyBusinessUnitQuery::create();

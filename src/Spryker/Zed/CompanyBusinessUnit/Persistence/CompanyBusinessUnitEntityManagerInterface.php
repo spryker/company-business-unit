@@ -11,34 +11,14 @@ use Generated\Shared\Transfer\CompanyBusinessUnitTransfer;
 
 interface CompanyBusinessUnitEntityManagerInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer
-     */
     public function saveCompanyBusinessUnit(
         CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
     ): CompanyBusinessUnitTransfer;
 
-    /**
-     * @param int $idCompanyBusinessUnit
-     *
-     * @return void
-     */
     public function deleteCompanyBusinessUnitById(int $idCompanyBusinessUnit): void;
 
-    /**
-     * @param int $idCompanyBusinessUnit
-     *
-     * @return void
-     */
     public function clearParentBusinessUnit(int $idCompanyBusinessUnit): void;
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer
-     */
     public function updateCompanyBusinessUnit(
         CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
     ): CompanyBusinessUnitTransfer;

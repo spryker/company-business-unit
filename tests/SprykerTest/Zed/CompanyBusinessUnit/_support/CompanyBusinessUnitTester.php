@@ -41,9 +41,6 @@ class CompanyBusinessUnitTester extends Actor
      */
     protected const CHILDREN = 'children';
 
-    /**
-     * @return array
-     */
     public static function createCompanyBusinessUnitsProvider(): array
     {
         return [
@@ -108,11 +105,6 @@ class CompanyBusinessUnitTester extends Actor
         ];
     }
 
-    /**
-     * @param array $seedData
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer
-     */
     public function buildCompanyBusinessUnitTransfer(array $seedData = []): CompanyBusinessUnitTransfer
     {
         $companyBusinessUnitTransfer = (new CompanyBusinessUnitBuilder($seedData))->build();

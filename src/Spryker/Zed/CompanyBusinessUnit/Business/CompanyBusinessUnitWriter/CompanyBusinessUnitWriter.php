@@ -60,11 +60,6 @@ class CompanyBusinessUnitWriter implements CompanyBusinessUnitWriterInterface
      */
     protected $companyBusinessUnitPluginExecutor;
 
-    /**
-     * @param \Spryker\Zed\CompanyBusinessUnit\Persistence\CompanyBusinessUnitRepositoryInterface $companyBusinessUnitRepository
-     * @param \Spryker\Zed\CompanyBusinessUnit\Persistence\CompanyBusinessUnitEntityManagerInterface $companyBusinessUnitEntityManager
-     * @param \Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitPluginExecutor\CompanyBusinessUnitPluginExecutorInterface $companyBusinessUnitPluginExecutor
-     */
     public function __construct(
         CompanyBusinessUnitRepositoryInterface $companyBusinessUnitRepository,
         CompanyBusinessUnitEntityManagerInterface $companyBusinessUnitEntityManager,
@@ -75,11 +70,6 @@ class CompanyBusinessUnitWriter implements CompanyBusinessUnitWriterInterface
         $this->companyBusinessUnitPluginExecutor = $companyBusinessUnitPluginExecutor;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitResponseTransfer
-     */
     public function update(CompanyBusinessUnitTransfer $companyBusinessUnitTransfer): CompanyBusinessUnitResponseTransfer
     {
         $companyBusinessUnitResponseTransfer = (new CompanyBusinessUnitResponseTransfer())
@@ -92,11 +82,6 @@ class CompanyBusinessUnitWriter implements CompanyBusinessUnitWriterInterface
         });
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitResponseTransfer
-     */
     public function delete(CompanyBusinessUnitTransfer $companyBusinessUnitTransfer): CompanyBusinessUnitResponseTransfer
     {
         $companyBusinessUnitTransfer = $this->repository
@@ -112,11 +97,6 @@ class CompanyBusinessUnitWriter implements CompanyBusinessUnitWriterInterface
         });
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitResponseTransfer $companyBusinessUnitResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitResponseTransfer
-     */
     protected function executeDeleteTransaction(CompanyBusinessUnitResponseTransfer $companyBusinessUnitResponseTransfer): CompanyBusinessUnitResponseTransfer
     {
         $companyBusinessUnitResponseTransfer
@@ -143,11 +123,6 @@ class CompanyBusinessUnitWriter implements CompanyBusinessUnitWriterInterface
         return $companyBusinessUnitResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitResponseTransfer $companyBusinessUnitResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitResponseTransfer
-     */
     protected function checkOnRelatedUsers(CompanyBusinessUnitResponseTransfer $companyBusinessUnitResponseTransfer): CompanyBusinessUnitResponseTransfer
     {
         $hasUsers = $this->repository->hasUsers(
@@ -168,11 +143,6 @@ class CompanyBusinessUnitWriter implements CompanyBusinessUnitWriterInterface
         return $companyBusinessUnitResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitResponseTransfer $companyBusinessUnitResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitResponseTransfer
-     */
     protected function executeUpdateTransaction(CompanyBusinessUnitResponseTransfer $companyBusinessUnitResponseTransfer): CompanyBusinessUnitResponseTransfer
     {
         $companyBusinessUnitTransfer = $companyBusinessUnitResponseTransfer->getCompanyBusinessUnitTransfer();
@@ -195,11 +165,6 @@ class CompanyBusinessUnitWriter implements CompanyBusinessUnitWriterInterface
         return $companyBusinessUnitResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
-     *
-     * @return bool
-     */
     protected function isCompanyBusinessUnitHierarchyCycleExists(CompanyBusinessUnitTransfer $companyBusinessUnitTransfer): bool
     {
         $visitedNodes = [];

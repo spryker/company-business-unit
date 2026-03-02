@@ -40,11 +40,6 @@ class CompanyBusinessUnitCreator implements CompanyBusinessUnitCreatorInterface
      */
     protected $companyBusinessUnitPluginExecutor;
 
-    /**
-     * @param \Spryker\Zed\CompanyBusinessUnit\Persistence\CompanyBusinessUnitEntityManagerInterface $companyBusinessUnitEntityManager
-     * @param \Spryker\Zed\CompanyBusinessUnit\CompanyBusinessUnitConfig $companyBusinessUnitConfig
-     * @param \Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitPluginExecutor\CompanyBusinessUnitPluginExecutorInterface $pluginExecutor
-     */
     public function __construct(
         CompanyBusinessUnitEntityManagerInterface $companyBusinessUnitEntityManager,
         CompanyBusinessUnitConfig $companyBusinessUnitConfig,
@@ -55,11 +50,6 @@ class CompanyBusinessUnitCreator implements CompanyBusinessUnitCreatorInterface
         $this->companyBusinessUnitPluginExecutor = $pluginExecutor;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitResponseTransfer
-     */
     public function create(CompanyBusinessUnitTransfer $companyBusinessUnitTransfer): CompanyBusinessUnitResponseTransfer
     {
         $companyBusinessUnitResponseTransfer = (new CompanyBusinessUnitResponseTransfer())
@@ -72,11 +62,6 @@ class CompanyBusinessUnitCreator implements CompanyBusinessUnitCreatorInterface
         });
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyResponseTransfer $companyResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyResponseTransfer
-     */
     public function createByCompany(CompanyResponseTransfer $companyResponseTransfer): CompanyResponseTransfer
     {
         $companyTransfer = $companyResponseTransfer->getCompanyTransfer();
@@ -98,11 +83,6 @@ class CompanyBusinessUnitCreator implements CompanyBusinessUnitCreatorInterface
         return $companyResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitResponseTransfer $companyBusinessUnitResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitResponseTransfer
-     */
     protected function executeCreateTransaction(CompanyBusinessUnitResponseTransfer $companyBusinessUnitResponseTransfer): CompanyBusinessUnitResponseTransfer
     {
         $companyBusinessUnitTransfer = $companyBusinessUnitResponseTransfer->getCompanyBusinessUnitTransfer();

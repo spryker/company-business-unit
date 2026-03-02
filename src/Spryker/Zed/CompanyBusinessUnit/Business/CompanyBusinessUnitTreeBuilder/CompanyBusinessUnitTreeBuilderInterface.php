@@ -12,10 +12,5 @@ use Generated\Shared\Transfer\CustomerTransfer;
 
 interface CompanyBusinessUnitTreeBuilderInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTreeNodeCollectionTransfer
-     */
     public function getCustomerCompanyBusinessUnitTree(CustomerTransfer $customerTransfer): CompanyBusinessUnitTreeNodeCollectionTransfer;
 }

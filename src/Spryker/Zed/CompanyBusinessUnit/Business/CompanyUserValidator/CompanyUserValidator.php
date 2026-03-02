@@ -24,20 +24,12 @@ class CompanyUserValidator implements CompanyUserValidatorInterface
      */
     protected $companyBusinessUnitRepository;
 
-    /**
-     * @param \Spryker\Zed\CompanyBusinessUnit\Persistence\CompanyBusinessUnitRepositoryInterface $companyBusinessUnitRepository
-     */
     public function __construct(
         CompanyBusinessUnitRepositoryInterface $companyBusinessUnitRepository
     ) {
         $this->companyBusinessUnitRepository = $companyBusinessUnitRepository;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function isUniqueCompanyUserByCustomer(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {
         $companyUserResponseTransfer = (new CompanyUserResponseTransfer())->setIsSuccessful(true);

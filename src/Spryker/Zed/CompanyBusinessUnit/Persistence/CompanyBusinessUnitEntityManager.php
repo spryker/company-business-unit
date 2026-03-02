@@ -18,11 +18,6 @@ use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
  */
 class CompanyBusinessUnitEntityManager extends AbstractEntityManager implements CompanyBusinessUnitEntityManagerInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer
-     */
     public function saveCompanyBusinessUnit(
         CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
     ): CompanyBusinessUnitTransfer {
@@ -45,11 +40,6 @@ class CompanyBusinessUnitEntityManager extends AbstractEntityManager implements 
         );
     }
 
-    /**
-     * @param int $idCompanyBusinessUnit
-     *
-     * @return void
-     */
     public function deleteCompanyBusinessUnitById(int $idCompanyBusinessUnit): void
     {
         $this->getFactory()
@@ -58,11 +48,6 @@ class CompanyBusinessUnitEntityManager extends AbstractEntityManager implements 
             ->delete();
     }
 
-    /**
-     * @param int $idCompanyBusinessUnit
-     *
-     * @return void
-     */
     public function clearParentBusinessUnit(int $idCompanyBusinessUnit): void
     {
         $this->getFactory()
@@ -71,11 +56,6 @@ class CompanyBusinessUnitEntityManager extends AbstractEntityManager implements 
             ->update(['FkParentCompanyBusinessUnit' => null]);
     }
 
-    /**
-     * @param int $idCompanyBusinessUnit
-     *
-     * @return void
-     */
     public function clearParentBusinessUnitByCompanyBusinessUnitId(int $idCompanyBusinessUnit): void
     {
         $this->getFactory()
@@ -84,11 +64,6 @@ class CompanyBusinessUnitEntityManager extends AbstractEntityManager implements 
             ->update(['FkParentCompanyBusinessUnit' => null]);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer
-     */
     public function updateCompanyBusinessUnit(
         CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
     ): CompanyBusinessUnitTransfer {
@@ -119,9 +94,6 @@ class CompanyBusinessUnitEntityManager extends AbstractEntityManager implements 
         );
     }
 
-    /**
-     * @return \Spryker\Zed\CompanyBusinessUnit\Persistence\Propel\Mapper\CompanyBusinessUnitMapperInterface
-     */
     protected function getMapper(): CompanyBusinessUnitMapperInterface
     {
         return $this->getFactory()->createCompanyBusinessUnitMapper();

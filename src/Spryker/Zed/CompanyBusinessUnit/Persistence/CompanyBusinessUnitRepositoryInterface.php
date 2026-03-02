@@ -14,36 +14,16 @@ use Generated\Shared\Transfer\CompanyUserTransfer;
 
 interface CompanyBusinessUnitRepositoryInterface
 {
-    /**
-     * @param int $idCompanyBusinessUnit
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer
-     */
     public function getCompanyBusinessUnitById(
         int $idCompanyBusinessUnit
     ): CompanyBusinessUnitTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitCriteriaFilterTransfer $criteriaFilterTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitCollectionTransfer
-     */
     public function getCompanyBusinessUnitCollection(
         CompanyBusinessUnitCriteriaFilterTransfer $criteriaFilterTransfer
     ): CompanyBusinessUnitCollectionTransfer;
 
-    /**
-     * @param int $idCompanyBusinessUnit
-     *
-     * @return bool
-     */
     public function hasUsers(int $idCompanyBusinessUnit): bool;
 
-    /**
-     * @param int $idCompany
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer|null
-     */
     public function findDefaultBusinessUnitByCompanyId(int $idCompany): ?CompanyBusinessUnitTransfer;
 
     /**
@@ -53,25 +33,10 @@ interface CompanyBusinessUnitRepositoryInterface
      */
     public function getCustomerReferencesByCompanyBusinessUnitIds(array $companyBusinessUnitIds): array;
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return bool
-     */
     public function hasCompanyUserByCustomer(CompanyUserTransfer $companyUserTransfer): bool;
 
-    /**
-     * @param int $idCompanyBusinessUnit
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer|null
-     */
     public function findCompanyBusinessUnitById(int $idCompanyBusinessUnit): ?CompanyBusinessUnitTransfer;
 
-    /**
-     * @param string $companyBusinessUnitUuid
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer|null
-     */
     public function findCompanyBusinessUnitByUuid(string $companyBusinessUnitUuid): ?CompanyBusinessUnitTransfer;
 
     /**

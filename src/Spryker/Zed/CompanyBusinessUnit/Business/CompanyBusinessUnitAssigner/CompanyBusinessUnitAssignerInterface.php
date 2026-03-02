@@ -11,11 +11,6 @@ use Generated\Shared\Transfer\CompanyUserResponseTransfer;
 
 interface CompanyBusinessUnitAssignerInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserResponseTransfer $companyUserResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
     public function assignDefaultBusinessUnitToCompanyUser(
         CompanyUserResponseTransfer $companyUserResponseTransfer
     ): CompanyUserResponseTransfer;

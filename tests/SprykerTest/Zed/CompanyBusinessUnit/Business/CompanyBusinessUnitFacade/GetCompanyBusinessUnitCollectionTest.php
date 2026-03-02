@@ -30,9 +30,6 @@ class GetCompanyBusinessUnitCollectionTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testGetCompanyBusinessUnitCollectionReturnsTransfersCollectionByIdCompany(): void
     {
         // Arrange
@@ -53,9 +50,6 @@ class GetCompanyBusinessUnitCollectionTest extends Unit
         $this->assertCount(1, $companyBusinessUnitCollection->getCompanyBusinessUnits());
     }
 
-    /**
-     * @return void
-     */
     public function testGetCompanyBusinessUnitCollectionReturnsTransfersCollectionByCompanyIds(): void
     {
         // Arrange
@@ -83,9 +77,6 @@ class GetCompanyBusinessUnitCollectionTest extends Unit
         $this->assertCount(2, $companyBusinessUnitCollection->getCompanyBusinessUnits());
     }
 
-    /**
-     * @return void
-     */
     public function testGetCompanyBusinessUnitCollectionReturnsEmptyCollectionByFakeIdCompany(): void
     {
         // Arrange
@@ -106,9 +97,6 @@ class GetCompanyBusinessUnitCollectionTest extends Unit
         $this->assertEmpty($companyBusinessUnitCollection->getCompanyBusinessUnits());
     }
 
-    /**
-     * @return void
-     */
     public function testGetCompanyBusinessUnitCollectionReturnsTransfersCollectionByIdCompanyUser(): void
     {
         // Arrange
@@ -135,9 +123,6 @@ class GetCompanyBusinessUnitCollectionTest extends Unit
         $this->assertCount(1, $companyBusinessUnitCollection->getCompanyBusinessUnits());
     }
 
-    /**
-     * @return void
-     */
     public function testGetCompanyBusinessUnitCollectionReturnsEmptyCollectionByFakeIdCompanyUser(): void
     {
         // Arrange
@@ -164,9 +149,6 @@ class GetCompanyBusinessUnitCollectionTest extends Unit
         $this->assertEmpty($companyBusinessUnitCollection->getCompanyBusinessUnits());
     }
 
-    /**
-     * @return void
-     */
     public function testGetCompanyBusinessUnitCollectionReturnsAllAvailableTransfers(): void
     {
         // Arrange

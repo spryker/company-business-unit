@@ -26,10 +26,6 @@ class CompanyBusinessUnitReader implements CompanyBusinessUnitReaderInterface
      */
     protected $companyBusinessUnitPluginExecutor;
 
-    /**
-     * @param \Spryker\Zed\CompanyBusinessUnit\Persistence\CompanyBusinessUnitRepositoryInterface $companyBusinessUnitRepository
-     * @param \Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitPluginExecutor\CompanyBusinessUnitPluginExecutorInterface $transferExpanderPluginExecutor
-     */
     public function __construct(
         CompanyBusinessUnitRepositoryInterface $companyBusinessUnitRepository,
         CompanyBusinessUnitPluginExecutorInterface $transferExpanderPluginExecutor
@@ -38,11 +34,6 @@ class CompanyBusinessUnitReader implements CompanyBusinessUnitReaderInterface
         $this->companyBusinessUnitPluginExecutor = $transferExpanderPluginExecutor;
     }
 
-    /**
-     * @param int $idCompanyBusinessUnit
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer
-     */
     public function getCompanyBusinessUnitById(int $idCompanyBusinessUnit): CompanyBusinessUnitTransfer
     {
         $companyBusinessUnitTransfer = $this->companyBusinessUnitRepository->getCompanyBusinessUnitById($idCompanyBusinessUnit);
@@ -51,11 +42,6 @@ class CompanyBusinessUnitReader implements CompanyBusinessUnitReaderInterface
         return $companyBusinessUnitTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitCriteriaFilterTransfer $companyBusinessUnitCriteriaFilterTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitCollectionTransfer
-     */
     public function getCompanyBusinessUnitCollection(
         CompanyBusinessUnitCriteriaFilterTransfer $companyBusinessUnitCriteriaFilterTransfer
     ): CompanyBusinessUnitCollectionTransfer {
@@ -76,11 +62,6 @@ class CompanyBusinessUnitReader implements CompanyBusinessUnitReaderInterface
         return $companyBusinessUnitCollectionTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitResponseTransfer
-     */
     public function findCompanyBusinessUnitByUuid(CompanyBusinessUnitTransfer $companyBusinessUnitTransfer): CompanyBusinessUnitResponseTransfer
     {
         $companyBusinessUnitTransfer->requireUuid();

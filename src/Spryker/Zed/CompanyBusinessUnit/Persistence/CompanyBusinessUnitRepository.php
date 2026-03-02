@@ -74,11 +74,6 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
             ->mapEntityTransferToBusinessUnitTransfer($entityTransfer, new CompanyBusinessUnitTransfer());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitCriteriaFilterTransfer $criteriaFilterTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitCollectionTransfer
-     */
     public function getCompanyBusinessUnitCollection(
         CompanyBusinessUnitCriteriaFilterTransfer $criteriaFilterTransfer
     ): CompanyBusinessUnitCollectionTransfer {
@@ -119,11 +114,6 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
         return $collectionTransfer;
     }
 
-    /**
-     * @param int $idCompanyBusinessUnit
-     *
-     * @return bool
-     */
     public function hasUsers(int $idCompanyBusinessUnit): bool
     {
         $existsSpyCompanyBusinessUnit = $this->getFactory()
@@ -136,11 +126,6 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
         return $existsSpyCompanyBusinessUnit;
     }
 
-    /**
-     * @param int $idCompany
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer|null
-     */
     public function findDefaultBusinessUnitByCompanyId(int $idCompany): ?CompanyBusinessUnitTransfer
     {
         $query = $this->getSpyCompanyBusinessUnitQuery()
@@ -180,11 +165,6 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
          return $customerReferences->toArray();
     }
 
-    /**
-     * @param int $idCompanyBusinessUnit
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer|null
-     */
     public function findCompanyBusinessUnitById(int $idCompanyBusinessUnit): ?CompanyBusinessUnitTransfer
     {
         $companyBusinessUnitQuery = $this->getSpyCompanyBusinessUnitQuery()
@@ -201,11 +181,6 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
             ->mapCompanyBusinessUnitEntityToCompanyBusinessUnitTransfer($companyBusinessUnitEntity, new CompanyBusinessUnitTransfer());
     }
 
-    /**
-     * @param string $companyBusinessUnitUuid
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer|null
-     */
     public function findCompanyBusinessUnitByUuid(string $companyBusinessUnitUuid): ?CompanyBusinessUnitTransfer
     {
         $companyBusinessUnitEntity = $this->getSpyCompanyBusinessUnitQuery()
@@ -248,9 +223,6 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
         return $paginationModel->getResults();
     }
 
-    /**
-     * @return \Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnitQuery
-     */
     protected function getSpyCompanyBusinessUnitQuery(): SpyCompanyBusinessUnitQuery
     {
         return $this->getFactory()
@@ -260,12 +232,6 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
             ->innerJoinWithCompany();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\PaginationTransfer $paginationTransfer
-     * @param \Propel\Runtime\Util\PropelModelPager $paginationModel
-     *
-     * @return void
-     */
     protected function mapPaginationModel(PaginationTransfer $paginationTransfer, PropelModelPager $paginationModel): void
     {
         $paginationTransfer
@@ -278,12 +244,6 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
             ->setPreviousPage($paginationModel->getPreviousPage());
     }
 
-    /**
-     * @param \Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnitQuery $companyBusinessUnitQuery
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitCriteriaFilterTransfer $criteriaFilterTransfer
-     *
-     * @return void
-     */
     protected function filterCompanyBusinessUnitCollection(
         SpyCompanyBusinessUnitQuery $companyBusinessUnitQuery,
         CompanyBusinessUnitCriteriaFilterTransfer $criteriaFilterTransfer
@@ -311,11 +271,6 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
         }
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
-     *
-     * @return bool
-     */
     public function hasCompanyUserByCustomer(CompanyUserTransfer $companyUserTransfer): bool
     {
         $companyUserTransfer

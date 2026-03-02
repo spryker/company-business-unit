@@ -41,11 +41,6 @@ class CompanyBusinessUnitPluginExecutor implements CompanyBusinessUnitPluginExec
         $this->companyBusinessUnitPreDeletePlugins = $companyBusinessUnitPreDeletePlugins;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer
-     */
     public function executeTransferExpanderPlugins(
         CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
     ): CompanyBusinessUnitTransfer {
@@ -56,11 +51,6 @@ class CompanyBusinessUnitPluginExecutor implements CompanyBusinessUnitPluginExec
         return $companyBusinessUnitTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTransfer
-     */
     public function executePostSavePlugins(CompanyBusinessUnitTransfer $companyBusinessUnitTransfer): CompanyBusinessUnitTransfer
     {
         foreach ($this->companyBusinessUnitPostSavePlugins as $plugin) {
@@ -70,11 +60,6 @@ class CompanyBusinessUnitPluginExecutor implements CompanyBusinessUnitPluginExec
         return $companyBusinessUnitTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
-     *
-     * @return void
-     */
     public function executePreDeletePlugins(CompanyBusinessUnitTransfer $companyBusinessUnitTransfer): void
     {
         foreach ($this->companyBusinessUnitPreDeletePlugins as $plugin) {

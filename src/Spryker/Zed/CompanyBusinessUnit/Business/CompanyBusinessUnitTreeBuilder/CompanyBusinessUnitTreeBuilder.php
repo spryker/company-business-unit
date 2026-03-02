@@ -22,19 +22,11 @@ class CompanyBusinessUnitTreeBuilder implements CompanyBusinessUnitTreeBuilderIn
      */
     protected $companyBusinessUnitRepository;
 
-    /**
-     * @param \Spryker\Zed\CompanyBusinessUnit\Persistence\CompanyBusinessUnitRepositoryInterface $companyBusinessUnitRepository
-     */
     public function __construct(CompanyBusinessUnitRepositoryInterface $companyBusinessUnitRepository)
     {
         $this->companyBusinessUnitRepository = $companyBusinessUnitRepository;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTreeNodeCollectionTransfer
-     */
     public function getCustomerCompanyBusinessUnitTree(CustomerTransfer $customerTransfer): CompanyBusinessUnitTreeNodeCollectionTransfer
     {
         if ($customerTransfer->getCompanyUserTransfer() === null) {
@@ -48,11 +40,6 @@ class CompanyBusinessUnitTreeBuilder implements CompanyBusinessUnitTreeBuilderIn
         return (new CompanyBusinessUnitTreeNodeCollectionTransfer())->setCompanyBusinessUnitTreeNodes($companyBusinessUnitTreeNodes);
     }
 
-    /**
-     * @param int $idCompany
-     *
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitCollectionTransfer
-     */
     protected function getCompanyBusinessUnitCollection(int $idCompany): CompanyBusinessUnitCollectionTransfer
     {
         $criteriaFilterTransfer = new CompanyBusinessUnitCriteriaFilterTransfer();
@@ -90,9 +77,6 @@ class CompanyBusinessUnitTreeBuilder implements CompanyBusinessUnitTreeBuilderIn
         return new ArrayObject($companyBusinessUnitTreeNodes);
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\CompanyBusinessUnitTreeNodeTransfer
-     */
     protected function createEmptyTreeNode(): CompanyBusinessUnitTreeNodeTransfer
     {
         return (new CompanyBusinessUnitTreeNodeTransfer())
