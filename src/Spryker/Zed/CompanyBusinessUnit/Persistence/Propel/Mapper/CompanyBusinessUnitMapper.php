@@ -58,7 +58,7 @@ class CompanyBusinessUnitMapper implements CompanyBusinessUnitMapperInterface
         CompanyBusinessUnitTransfer $companyBusinessUnitTransfer,
         SpyCompanyBusinessUnit $companyBusinessUnitEntity
     ): SpyCompanyBusinessUnit {
-        return $companyBusinessUnitEntity->fromArray($companyBusinessUnitTransfer->toArray());
+        return $companyBusinessUnitEntity->fromArray($companyBusinessUnitTransfer->modifiedToArray());
     }
 
     protected function mapCompanyEntityToCompanyTransfer(
