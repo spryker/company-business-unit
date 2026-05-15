@@ -46,6 +46,7 @@
         <property name="companyBusinessUnitIds" type="array" singular="companyBusinessUnitIds"/>
         <property name="withoutExpanders" type="bool"/>
         <property name="companyIds" type="int[]" singular="companyId"/>
+        <property name="uuids" type="string[]" singular="uuid"/>
     </transfer>
 
     <transfer name="Filter">

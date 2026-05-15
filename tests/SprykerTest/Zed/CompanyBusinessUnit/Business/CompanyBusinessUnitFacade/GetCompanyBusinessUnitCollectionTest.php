@@ -149,6 +149,54 @@ class GetCompanyBusinessUnitCollectionTest extends Unit
         $this->assertEmpty($companyBusinessUnitCollection->getCompanyBusinessUnits());
     }
 
+    public function testGetCompanyBusinessUnitCollectionReturnsCollectionByUuids(): void
+    {
+        // Arrange
+        $companyTransfer = $this->tester->haveCompany();
+        $companyBusinessUnitTransfer = $this->tester->haveCompanyBusinessUnit([
+            CompanyBusinessUnitTransfer::FK_COMPANY => $companyTransfer->getIdCompany(),
+        ]);
+        $this->tester->haveCompanyBusinessUnit([
+            CompanyBusinessUnitTransfer::FK_COMPANY => $companyTransfer->getIdCompany(),
+        ]);
+
+        $companyBusinessUnitCriteriaFilterTransfer = (new CompanyBusinessUnitCriteriaFilterTransfer())
+            ->addUuid($companyBusinessUnitTransfer->getUuid())
+            ->setWithoutExpanders(true);
+
+        // Act
+        $companyBusinessUnitCollection = $this->tester
+            ->getFacade()
+            ->getCompanyBusinessUnitCollection($companyBusinessUnitCriteriaFilterTransfer);
+
+        // Assert
+        $this->assertCount(1, $companyBusinessUnitCollection->getCompanyBusinessUnits());
+        $this->assertSame(
+            $companyBusinessUnitTransfer->getUuid(),
+            $companyBusinessUnitCollection->getCompanyBusinessUnits()->offsetGet(0)->getUuid(),
+        );
+    }
+
+    public function testGetCompanyBusinessUnitCollectionReturnsEmptyCollectionByFakeUuid(): void
+    {
+        // Arrange
+        $this->tester->haveCompanyBusinessUnit([
+            CompanyBusinessUnitTransfer::FK_COMPANY => $this->tester->haveCompany()->getIdCompany(),
+        ]);
+
+        $companyBusinessUnitCriteriaFilterTransfer = (new CompanyBusinessUnitCriteriaFilterTransfer())
+            ->addUuid('non-existing-uuid')
+            ->setWithoutExpanders(true);
+
+        // Act
+        $companyBusinessUnitCollection = $this->tester
+            ->getFacade()
+            ->getCompanyBusinessUnitCollection($companyBusinessUnitCriteriaFilterTransfer);
+
+        // Assert
+        $this->assertEmpty($companyBusinessUnitCollection->getCompanyBusinessUnits());
+    }
+
     public function testGetCompanyBusinessUnitCollectionReturnsAllAvailableTransfers(): void
     {
         // Arrange
