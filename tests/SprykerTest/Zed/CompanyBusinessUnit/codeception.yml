@@ -31,3 +31,10 @@ suites:
                 - \SprykerTest\Service\Container\Helper\ContainerHelper
                 - \SprykerTest\Zed\Store\Helper\StoreDependencyHelper
                 - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
+    Persistence:
+        path: Persistence
+        actor: CompanyBusinessUnitPersistenceTester
+        modules:
+            enabled:
+                - Asserts
+                - \SprykerTest\Shared\Testify\Helper\Environment
