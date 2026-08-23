@@ -46,7 +46,6 @@ class CompanyBusinessUnitTreeBuilderTest extends Unit
             '\Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitTreeBuilder\CompanyBusinessUnitTreeBuilder',
             'buildTree',
         );
-        $companyBusinessUnitTreeBuilder->setAccessible(true);
         $companyBusinessUnitRepositoryMock = $this->createCompanyBusinessUnitRepositoryMock();
 
         // Act
