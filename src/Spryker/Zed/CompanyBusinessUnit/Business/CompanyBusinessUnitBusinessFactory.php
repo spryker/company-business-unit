@@ -18,6 +18,8 @@ use Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitTreeBuilder\Comp
 use Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitTreeBuilder\CompanyBusinessUnitTreeBuilderInterface;
 use Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitWriter\CompanyBusinessUnitWriter;
 use Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitWriter\CompanyBusinessUnitWriterInterface;
+use Spryker\Zed\CompanyBusinessUnit\Business\CompanyUserValidator\CompanyUserBusinessUnitValidator;
+use Spryker\Zed\CompanyBusinessUnit\Business\CompanyUserValidator\CompanyUserBusinessUnitValidatorInterface;
 use Spryker\Zed\CompanyBusinessUnit\Business\CompanyUserValidator\CompanyUserValidator;
 use Spryker\Zed\CompanyBusinessUnit\Business\CompanyUserValidator\CompanyUserValidatorInterface;
 use Spryker\Zed\CompanyBusinessUnit\CompanyBusinessUnitDependencyProvider;
@@ -109,6 +111,13 @@ class CompanyBusinessUnitBusinessFactory extends AbstractBusinessFactory
     public function createCompanyUserValidator(): CompanyUserValidatorInterface
     {
         return new CompanyUserValidator(
+            $this->getRepository(),
+        );
+    }
+
+    public function createCompanyUserBusinessUnitValidator(): CompanyUserBusinessUnitValidatorInterface
+    {
+        return new CompanyUserBusinessUnitValidator(
             $this->getRepository(),
         );
     }

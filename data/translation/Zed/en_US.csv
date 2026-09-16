@@ -1,0 +1,3 @@
+message.company_user.validation.business_unit_not_found,"Company business unit not found."
+message.company_user.validation.business_unit_not_in_company,"Company business unit does not belong to the selected company."
+"Customer already attached to this business unit.","Customer already attached to this business unit."

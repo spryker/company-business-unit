@@ -1,0 +1,3 @@
+message.company_user.validation.business_unit_not_found,"Geschäftseinheit nicht gefunden."
+message.company_user.validation.business_unit_not_in_company,"Die Geschäftseinheit gehört nicht zum ausgewählten Unternehmen."
+"Customer already attached to this business unit.","Der Kunde ist dieser Geschäftseinheit bereits zugeordnet."
