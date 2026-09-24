@@ -8,9 +8,12 @@
 namespace SprykerTest\Zed\CompanyBusinessUnit\Helper;
 
 use Codeception\Module;
+use Generated\Shared\DataBuilder\CompanyBuilder;
 use Generated\Shared\DataBuilder\CompanyBusinessUnitBuilder;
 use Generated\Shared\Transfer\CompanyBusinessUnitTransfer;
+use Generated\Shared\Transfer\CompanyTransfer;
 use Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnitQuery;
+use Spryker\Zed\Company\Business\CompanyFacadeInterface;
 use Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitFacadeInterface;
 use SprykerTest\Shared\Testify\Helper\LocatorHelperTrait;
 
@@ -30,9 +33,29 @@ class CompanyBusinessUnitHelper extends Module
             ->getCompanyBusinessUnitTransfer();
     }
 
+    public function haveCompanyNamed(string $name): CompanyTransfer
+    {
+        $companyTransfer = (new CompanyBuilder([CompanyTransfer::NAME => $name]))->build();
+        $companyTransfer->setIdCompany(null);
+
+        return $this->getCompanyFacade()
+            ->create($companyTransfer)
+            ->getCompanyTransfer();
+    }
+
+    public function buildUniqueToken(): string
+    {
+        return uniqid('cbu', false);
+    }
+
     public function getBusinessUnitsCount(): int
     {
         return SpyCompanyBusinessUnitQuery::create()->count();
+    }
+
+    protected function getCompanyFacade(): CompanyFacadeInterface
+    {
+        return $this->getLocator()->company()->facade();
     }
 
     protected function getCompanyBusinessUnitFacade(): CompanyBusinessUnitFacadeInterface

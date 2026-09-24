@@ -12,12 +12,14 @@ use Generated\Shared\Transfer\CompanyBusinessUnitCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyBusinessUnitTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\PaginationTransfer;
+use Orm\Zed\Company\Persistence\Map\SpyCompanyTableMap;
 use Orm\Zed\CompanyBusinessUnit\Persistence\Map\SpyCompanyBusinessUnitTableMap;
 use Orm\Zed\CompanyBusinessUnit\Persistence\SpyCompanyBusinessUnitQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Propel\Runtime\Util\PropelModelPager;
 use Spryker\Zed\CompanyBusinessUnit\Business\CompanyBusinessUnitException\CompanyBusinessUnitNotFoundException;
+use Spryker\Zed\CompanyBusinessUnit\CompanyBusinessUnitConfig;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -26,9 +28,15 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 class CompanyBusinessUnitRepository extends AbstractRepository implements CompanyBusinessUnitRepositoryInterface
 {
     /**
-     * @var string
+     * The uuid column reaches spy_company_business_unit through a Propel behavior, so the generated
+     * query only gains the filters once the project has run the migration for it.
      */
-    protected const TABLE_JOIN_PARENT_BUSINESS_UNIT = 'parentCompanyBusinessUnit';
+    protected const string COMPANY_BUSINESS_UNIT_UUID_FILTER_METHOD = 'filterByUuid';
+
+    /**
+     * @see static::COMPANY_BUSINESS_UNIT_UUID_FILTER_METHOD
+     */
+    protected const string COMPANY_BUSINESS_UNIT_UUIDS_FILTER_METHOD = 'filterByUuid_In';
 
     /**
      * @see \Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap::COL_CUSTOMER_REFERENCE
@@ -92,6 +100,8 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
         }
 
         $this->filterCompanyBusinessUnitCollection($query, $criteriaFilterTransfer);
+        $this->applySearchTermToQuery($query, $criteriaFilterTransfer);
+        $this->applySortToQuery($query, $criteriaFilterTransfer);
 
         $collection = $this->buildQueryFromCriteria($query, $criteriaFilterTransfer->getFilter());
         $collection = $this->getPaginatedCollection($collection, $criteriaFilterTransfer->getPagination());
@@ -183,7 +193,13 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
 
     public function findCompanyBusinessUnitByUuid(string $companyBusinessUnitUuid): ?CompanyBusinessUnitTransfer
     {
-        $companyBusinessUnitEntity = $this->getSpyCompanyBusinessUnitQuery()
+        $companyBusinessUnitQuery = $this->getSpyCompanyBusinessUnitQuery();
+
+        if (!method_exists($companyBusinessUnitQuery, static::COMPANY_BUSINESS_UNIT_UUID_FILTER_METHOD)) {
+            return null;
+        }
+
+        $companyBusinessUnitEntity = $companyBusinessUnitQuery
             ->filterByUuid($companyBusinessUnitUuid)
             ->findOne();
 
@@ -211,13 +227,10 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
             return $query->find();
         }
 
-        $page = $paginationTransfer
-            ->requirePage()
-            ->getPage();
-        $maxPerPage = $paginationTransfer
-            ->requireMaxPerPage()
-            ->getMaxPerPage();
-        $paginationModel = $query->paginate($page, $maxPerPage);
+        $paginationModel = $query->paginate(
+            $paginationTransfer->getPageOrFail(),
+            $paginationTransfer->getMaxPerPageOrFail(),
+        );
         $this->mapPaginationModel($paginationTransfer, $paginationModel);
 
         return $paginationModel->getResults();
@@ -227,8 +240,8 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
     {
         return $this->getFactory()
             ->createCompanyBusinessUnitQuery()
-            ->leftJoinParentCompanyBusinessUnit(static::TABLE_JOIN_PARENT_BUSINESS_UNIT)
-            ->with(static::TABLE_JOIN_PARENT_BUSINESS_UNIT)
+            ->leftJoinParentCompanyBusinessUnit(CompanyBusinessUnitConfig::PARENT_BUSINESS_UNIT_ALIAS)
+            ->with(CompanyBusinessUnitConfig::PARENT_BUSINESS_UNIT_ALIAS)
             ->innerJoinWithCompany();
     }
 
@@ -244,6 +257,44 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
             ->setPreviousPage($paginationModel->getPreviousPage());
     }
 
+    protected function applySearchTermToQuery(
+        SpyCompanyBusinessUnitQuery $companyBusinessUnitQuery,
+        CompanyBusinessUnitCriteriaFilterTransfer $criteriaFilterTransfer
+    ): void {
+        $searchTerm = $criteriaFilterTransfer->getSearchTerm();
+
+        if ($searchTerm === null || $searchTerm === '') {
+            return;
+        }
+
+        $pattern = sprintf('%%%s%%', mb_strtolower($searchTerm));
+
+        $companyBusinessUnitQuery
+            ->condition('businessUnitName', sprintf('LOWER(%s) LIKE ?', SpyCompanyBusinessUnitTableMap::COL_NAME), $pattern)
+            ->condition('companyName', sprintf('LOWER(%s) LIKE ?', SpyCompanyTableMap::COL_NAME), $pattern)
+            ->condition('parentName', sprintf('LOWER(%s.name) LIKE ?', CompanyBusinessUnitConfig::PARENT_BUSINESS_UNIT_ALIAS), $pattern)
+            ->where(['businessUnitName', 'companyName', 'parentName'], Criteria::LOGICAL_OR);
+    }
+
+    protected function applySortToQuery(
+        SpyCompanyBusinessUnitQuery $companyBusinessUnitQuery,
+        CompanyBusinessUnitCriteriaFilterTransfer $criteriaFilterTransfer
+    ): void {
+        $sortableFieldMap = $this->getFactory()->getConfig()->getCompanyBusinessUnitCollectionSortableFieldMap();
+
+        foreach ($criteriaFilterTransfer->getSortCollection() as $sortTransfer) {
+            $column = $sortableFieldMap[$sortTransfer->getField()] ?? null;
+
+            if ($column === null) {
+                continue;
+            }
+
+            $companyBusinessUnitQuery->orderBy($column, $sortTransfer->getIsAscending() === false ? Criteria::DESC : Criteria::ASC);
+        }
+
+        $companyBusinessUnitQuery->orderBy(SpyCompanyBusinessUnitTableMap::COL_ID_COMPANY_BUSINESS_UNIT, Criteria::DESC);
+    }
+
     protected function filterCompanyBusinessUnitCollection(
         SpyCompanyBusinessUnitQuery $companyBusinessUnitQuery,
         CompanyBusinessUnitCriteriaFilterTransfer $criteriaFilterTransfer
@@ -252,13 +303,18 @@ class CompanyBusinessUnitRepository extends AbstractRepository implements Compan
             $companyBusinessUnitQuery->filterByIdCompanyBusinessUnit_In($criteriaFilterTransfer->getCompanyBusinessUnitIds());
         }
 
-        if ($criteriaFilterTransfer->getUuids() !== []) {
+        if (
+            $criteriaFilterTransfer->getUuids() !== []
+            && method_exists($companyBusinessUnitQuery, static::COMPANY_BUSINESS_UNIT_UUIDS_FILTER_METHOD)
+        ) {
             $companyBusinessUnitQuery->filterByUuid_In($criteriaFilterTransfer->getUuids());
         }
 
         if ($criteriaFilterTransfer->getName()) {
-            $companyBusinessUnitQuery->filterByName(sprintf('%%%s%%', $criteriaFilterTransfer->getName()), Criteria::LIKE);
-            $companyBusinessUnitQuery->setIgnoreCase(true);
+            $companyBusinessUnitQuery->where(
+                sprintf('LOWER(%s) LIKE ?', SpyCompanyBusinessUnitTableMap::COL_NAME),
+                sprintf('%%%s%%', mb_strtolower($criteriaFilterTransfer->getName())),
+            );
         }
 
         if ($criteriaFilterTransfer->getCompanyIds() !== []) {

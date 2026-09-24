@@ -41,12 +41,19 @@
         <property name="idCompany" type="int"/>
         <property name="idCompanyUser" type="int"/>
         <property name="name" type="string"/>
+        <property name="searchTerm" type="string"/>
         <property name="filter" type="Filter"/>
         <property name="pagination" type="Pagination"/>
         <property name="companyBusinessUnitIds" type="array" singular="companyBusinessUnitIds"/>
         <property name="withoutExpanders" type="bool"/>
         <property name="companyIds" type="int[]" singular="companyId"/>
         <property name="uuids" type="string[]" singular="uuid"/>
+        <property name="sortCollection" type="Sort[]" singular="sort"/>
+    </transfer>
+
+    <transfer name="Sort">
+        <property name="field" type="string"/>
+        <property name="isAscending" type="bool"/>
     </transfer>
 
     <transfer name="Filter">

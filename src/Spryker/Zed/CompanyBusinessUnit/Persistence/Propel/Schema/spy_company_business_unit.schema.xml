@@ -9,6 +9,7 @@
         <column name="external_url" type="VARCHAR" size="255" required="false" description="An external URL, often for more details or an external resource."/>
         <column name="iban" type="VARCHAR" size="255" required="false" description="The International Bank Account Number."/>
         <column name="bic" type="VARCHAR" size="255" required="false" description="The Business Identifier Code for a bank account."/>
+        <column name="uuid" required="false" type="VARCHAR" size="36" description="A Universally Unique Identifier for an entity."/>
 
         <column name="fk_company" type="INTEGER" required="true"/>
 
@@ -23,6 +24,14 @@
         <foreign-key name="spy_company_business_unit-fk_parent_company_business_unit" foreignTable="spy_company_business_unit" phpName="ParentCompanyBusinessUnit" refPhpName="ChildrenCompanyBusinessUnits">
              <reference local="fk_parent_company_business_unit" foreign="id_company_business_unit"/>
         </foreign-key>
+
+        <unique name="spy_company_business_unit-unique-uuid">
+            <unique-column name="uuid"/>
+        </unique>
+
+        <behavior name="uuid">
+            <parameter name="key_columns" value="id_company_business_unit.fk_company"/>
+        </behavior>
     </table>
 
 </database>
