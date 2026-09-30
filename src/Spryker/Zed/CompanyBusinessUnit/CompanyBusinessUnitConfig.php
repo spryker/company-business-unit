@@ -72,4 +72,18 @@ class CompanyBusinessUnitConfig extends AbstractBundleConfig
             static::FILTER_FIELD_NAME => CompanyBusinessUnitCriteriaFilterTransfer::NAME,
         ];
     }
+
+    /**
+     * Specification:
+     * - Returns true if the UUID feature for company business unit entities is enabled.
+     * - When enabled, the uuid column and unique index are added to spy_company_business_unit table.
+     *
+     * @api
+     *
+     * @return bool
+     */
+    public function isUuidEnabled(): bool
+    {
+        return false;
+    }
 }
